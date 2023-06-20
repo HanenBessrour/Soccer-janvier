@@ -1,0 +1,62 @@
+<div class="hero overlay" style="background-image: url('assets/images/bg_3.jpg');">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-9 mx-auto text-center">
+        <h1 class="text-white">Search Matches</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 title-section">
+        <h2 class="heading">Search Matches</h2>
+      </div>
+      <div class="col-lg-12">
+        <form [formGroup]="searchMatchesForm">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="scoreOne" placeholder="Score One">
+          </div>
+          <div *ngIf="searchMatchesForm.controls['scoreOne'].invalid &&
+              (searchMatchesForm.controls['scoreOne'].touched || 
+              searchMatchesForm.controls['scoreOne'].dirty)">
+            <div *ngIf="searchMatchesForm.controls['scoreOne'].errors.required">
+             ScoreOne is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="scoreTwo" placeholder="Score Two">
+          </div>
+          <div *ngIf="searchMatchesForm.controls['scoreTwo'].invalid &&
+                (searchMatchesForm.controls['scoreTwo'].touched || 
+                searchMatchesForm.controls['scoreTwo'].dirty)">
+            <div *ngIf="searchMatchesForm.controls['scoreTwo'].errors.required">
+               ScoreTwo is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input type="submit" (click)="searchMatch()" [disabled]="searchMatchesForm.invalid"
+              class="btn btn-primary py-3 px-5" value="Search">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <div *ngFor="let m of matches">
+      
+      <app-results [matchInput]="m"></app-results>
+    </div>
+    <div *ngIf="matches?.length == 0">
+      No Founded Matches
+    </div>
+
+
+
+  </div>
+</div>
